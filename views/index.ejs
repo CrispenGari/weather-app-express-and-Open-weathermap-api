@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<script>
+    var socket = io();
+    socket.on('data', data=>{
+        
+        var container_res           = document.querySelector('.results')
+        document.getElementById('country').innerHTML             = '<p class= "child-p"><b>Country:</b> ' + data.sys.country + "</p>"
+        document.getElementById('city_name').innerHTML           = '<p class= "child-p"><b>City:</b> ' + data.name + "</p>"
+        document.getElementById('temperature').innerHTML         = '<p class= "child-p"><b>Temperature:</b> ' + data.main.temp + " &deg; F</p>"
+        document.getElementById('humidity').innerHTML            = '<p class= "child-p"><b>Humidity:</b> ' + data.main.humidity + " %</p>"
+    })
+    
+</script>
+<body>
+    <div class="container">
+        
+        <fieldset>
+            <legend>Weather App</legend>
+            <form action="/" method="post">
+                <p>
+                <input type="text" name="city_name" id="city-name" placeholder="Enter a city name" required autofocus>
+                </p>
+                <p>
+                    <button type="submit">Get Weather &deg;</button>
+                </p>
+            </form>
+            <div class="results">
+               
+                <div class = "child-elements" id ="country"></div>
+                <div class = "child-elements" id ="city_name"></div>
+                <div class = "child-elements" id ="temperature"></div>
+                <div class = "child-elements" id ="humidity"></div>
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>
